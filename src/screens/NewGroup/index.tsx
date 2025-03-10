@@ -5,34 +5,32 @@ import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
+import { Alert } from "react-native";
 
-export function NewGroup(){
-    const [group, setGroup] = useState('')
+export function NewGroup() {
+  const [group, setGroup] = useState("");
 
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
-    function handleNew(){
-        navigation.navigate('Players', {group});
+  function handleNew() {
+    if (!group) {
+      Alert.alert("Atenção", "Preencha o nome da turma");
+      return;
     }
-    return (
-        <Container>
-            <Header showBackButton/>
-            <Content>
-                <Icon/>
-                <Highlight 
-                title="Nova turma"
-                subtitle="crie a turma para adicionar pessoas"
-                />
-                <Input 
-                placeholder="Nome da Turma"
-                onChangeText={setGroup}
-                />
-                <Button 
-                style={{marginTop: 20}}
-                title="Criar"
-                onPress={handleNew}
-                />
-            </Content>
-        </Container>
-    )
+    navigation.navigate("Players", { group });
+  }
+  return (
+    <Container>
+      <Header showBackButton />
+      <Content>
+        <Icon />
+        <Highlight
+          title="Nova turma"
+          subtitle="crie a turma para adicionar pessoas"
+        />
+        <Input placeholder="Nome da Turma" onChangeText={setGroup} />
+        <Button style={{ marginTop: 20 }} title="Criar" onPress={handleNew} />
+      </Content>
+    </Container>
+  );
 }
