@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 
 export function Groups() {
   const [groups, setGroups] = useState<string[]>([]);
-  const navigation = useNavigation();
+  const navigation = useNavigation(); /*Hook para acessar prop de navegacao */
 
 
   function handleNeGroup(){
