@@ -4,22 +4,26 @@ import { Highlight } from "@/components/highlight";
 import { ButtonIcon } from "@/components/buttonIcon";
 import { Input } from "@/components/input";
 import { Filter } from "@/components/filter";
-import { FlatList } from "react-native";
+import { FlatList} from "react-native";
 import { useState } from "react";
 import { PlayerCard } from "@/components/playerCard";
 import { ListEmpty } from "@/components/listempty";
 import { Button } from "@/components/button";
-
+import { useRoute } from "@react-navigation/native";
+type RouteParams = {
+  group: string; // Parametro passado na rota
+};
 export function Players() {
+  const route =
+    useRoute(); /* Permite acessar parametros passados pelas rotas */
+  const { group } = route.params as RouteParams;
+
   const [team, setTeam] = useState("Time A");
   const [players, setPlayers] = useState<string[]>([]);
   return (
     <Container>
       <Header showBackButton />
-      <Highlight
-        title="Nome da turma"
-        subtitle="adicione a galera e separe os times"
-      />
+      <Highlight title={group} subtitle="adicione a galera e separe os times" />
       <Form>
         <Input placeholder="Nome do jogador" autoCorrect={false} />
         <ButtonIcon icon="add" />

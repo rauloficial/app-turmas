@@ -7,9 +7,16 @@ import { Header } from "@/components/header";
 import { Highlight } from "@/components/highlight";
 import { ListEmpty } from "@/components/listempty";
 import { Container } from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 export function Groups() {
   const [groups, setGroups] = useState<string[]>([]);
+  const navigation = useNavigation();
+
+
+  function handleNeGroup(){
+    navigation.navigate("NewGroup")
+  }
   return (
     <Container>
       <Header />
@@ -23,7 +30,7 @@ export function Groups() {
           <ListEmpty message="Nenhum grupo criado ainda" />
         )}
       />
-      <Button title="Nova turma" />
+      <Button title="Nova turma" onPress={handleNeGroup} />
     </Container>
   );
 }
