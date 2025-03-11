@@ -6,17 +6,19 @@ import { Input } from "@/components/input";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { Alert } from "react-native";
+import { groupCreate } from "@/storage/group/groupCreate";
 
 export function NewGroup() {
   const [group, setGroup] = useState("");
 
   const navigation = useNavigation();
 
-  function handleNew() {
+  async function handleNew() {
     if (!group) {
       Alert.alert("Atenção", "Preencha o nome da turma");
       return;
     }
+    await groupCreate(group)
     navigation.navigate("Players", { group });
   }
   return (
